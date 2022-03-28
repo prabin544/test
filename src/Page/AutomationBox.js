@@ -1,21 +1,44 @@
-import React from 'react';
-import Accordion from 'react-bootstrap/Accordion'
+import React from "react";
+import { useState } from "react";
+import "./automation.css";
+import { Container } from "react-bootstrap";
 
-export default function AutomationBox() {
+const Accordion = ({ title, children }) => {
+  const [isOpen, setOpen] = React.useState(false);
   return (
-    <Accordion>
-    <Accordion.Item eventKey="0">
-        <Accordion.Header>Accordion Item #1</Accordion.Header>
-        <Accordion.Body>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-        est laborum.
-        </Accordion.Body>
-    </Accordion.Item>
-    </Accordion>
-  )
-}
+    <div className="accordion-wrapper">
+      <div
+        className={`accordion-title ${isOpen ? "open" : ""}`}
+        onClick={() => setOpen(!isOpen)}
+      >
+        {title}
+      </div>
+      <div className={`accordion-item ${!isOpen ? "collapsed" : ""}`}>
+        <div className="accordion-content">{children}</div>
+      </div>
+    </div>
+  );
+};
+const AutomationBox = () => (
+  <div className="centered">
+    <div className="wrapper">
+      <Accordion title="Why is the sky blue?">
+        Sunlight reaches Earth's atmosphere and is scattered in all directions
+        by all the gases and particles in the air. Blue light is scattered more
+        than the other colors because it travels as shorter, smaller waves. This
+        is why we see a blue sky most of the time.
+      </Accordion>
+      <Accordion title="What's It Like Inside Jupiter?">
+        It's really hot inside Jupiter! No one knows exactly how hot, but
+        scientists think it could be about 43,000°F (24,000°C) near Jupiter's
+        center, or core.
+      </Accordion>
+      <Accordion title="What Is a Black Hole?">
+        A black hole is an area of such immense gravity that nothing -- not even
+        light -- can escape from it.
+      </Accordion>
+    </div>
+  </div>
+);
+
+export default AutomationBox;
